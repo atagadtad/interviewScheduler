@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 import Button from "components/Button";
 
 import InterviewerList from "components/InterviewerList";
 
 export default function Form(props) {
-
   const [name, setName] = useState(props.name || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
 
   function reset() {
     setName("");
-    setInterviewer(null);
+    setInterviewer();
   }
 
   function cancel() {
@@ -20,7 +19,8 @@ export default function Form(props) {
   }
 
   function save() {
-    props.onSave(name, interviewer)
+    console.log("calling save with interviewer of ", interviewer);
+    props.onSave(name, interviewer);
   }
 
   return (
@@ -31,23 +31,31 @@ export default function Form(props) {
             className="appointment__create-input text--semi-bold"
             name="name"
             value={name}
-            onChange={(event) => setName(event.target.value)}
+            onChange={event => setName(event.target.value)}
             type="text"
             placeholder="Enter Student Name"
-          /*
+            /*
             This must be a controlled component
           */
           />
         </form>
-        <InterviewerList interviewers={props.interviewers} value={interviewer} onChange={setInterviewer} />
+        <InterviewerList
+          interviewers={props.interviewers}
+          value={interviewer}
+          selected={props.id}
+          onChange={setInterviewer}
+        />
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
-          <Button onClick={cancel} danger>Cancel</Button>
-          <Button onClick={save} confirm>Save</Button>
+          <Button onClick={cancel} danger>
+            Cancel
+          </Button>
+          <Button onClick={() => save()} confirm>
+            Save
+          </Button>
         </section>
       </section>
     </main>
-
-  )
+  );
 }
