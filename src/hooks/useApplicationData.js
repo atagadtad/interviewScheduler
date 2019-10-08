@@ -35,12 +35,20 @@ export default function useApplicationData() {
         };
       }
       case DELETE_INTERVIEW: {
-        const appointments = { ...state.appointments };
-        appointments[action.appointment.id].interview = null;
+        // const appointments = { ...state.appointments };
+        // appointments[action.appointment.id].interview = null;
 
         return {
+          // ...state,
+          // appointments,
           ...state,
-          appointments,
+          appointments: {
+            ...state.appointments,
+            [action.appointment.id]: {
+              ...state.appointments[action.appointment.id],
+              interview: null
+            }
+          },
           days: action.days
         };
       }
@@ -128,14 +136,24 @@ export default function useApplicationData() {
         interview
       })
       .then(res => {
-        const appointments = { ...state.appointments };
-        appointments[appointmentId].interview = null;
+        console.log(".then check:", "oh hai");
+        // const appointments = { ...state.appointments };
+        // appointments[appointmentId].interview = null;
+        const appointments = {
+          ...state.appointments,
+          [appointmentId]: {
+            ...state.appointments[appointmentId],
+            interview: null
+          }
+        };
+
         dispatch({
           type: DELETE_INTERVIEW,
           days: updatedDays(appointments),
           appointment
         });
       });
+    // .catch(e => console.log(e));
   }
 
   return { state, setDay, bookInterview, cancelInterview };

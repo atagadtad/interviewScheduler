@@ -24,6 +24,8 @@ export default function Appointment(props) {
     props.interview === null ? EMPTY : SHOW
   );
 
+  console.log("state in index.js/Appointment: ", props);
+
   function save(name, interviewer) {
     const interview = {
       student: name,
