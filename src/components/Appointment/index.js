@@ -46,49 +46,34 @@ export default function Appointment(props) {
       .catch(() => transition(ERROR_DELETE, true));
   }
 
-  function interviewerName() {
-    let interviewerName;
-    if (props.interview !== null) {
-      interviewerName = props.interview.interviewer.name;
-    }
-    return interviewerName;
-  }
-
-  function interviewerID() {
-    let interviewerID;
-    if (props.interview !== null) {
-      interviewerID = props.interview.interviewer.id;
-    }
-
-    return interviewerID;
-  }
-
-  function studentName() {
-    let nameOfStudent;
-    if (props.interview !== null) {
-      nameOfStudent = props.interview.student;
-    }
-    return nameOfStudent;
+  function interviewDetail(detail = "") {
+    return (
+      props.interview !== null && detail.length > 0 && props.interview[detail]
+    );
   }
 
   return (
-    <article className="appointment">
+    <article data-testid="appointment" className="appointment">
       <Header time={props.time} />
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
       {mode === SHOW && (
         <Show
           onEdit={() => transition(EDIT)}
           onDelete={() => transition(CONFIRM)}
-          interviewer={interviewerName()}
-          student={studentName()}
+          interviewer={
+            (interviewDetail("interviewer") || { name: "Unnamed Interviewer" })
+              .name
+          }
+          student={interviewDetail("student")}
         />
       )}
       {mode === EDIT && (
         <Form
-          name={studentName()}
-          interviewer={interviewerID()}
+          name={interviewDetail("student")}
+          interviewer={interviewDetail("id")}
           interviewers={props.interviewers}
           onSave={save}
+          onCancel={() => back()}
         />
       )}
       {mode === SAVING && <Status message="Saving" />}

@@ -7,6 +7,7 @@ import InterviewerList from "components/InterviewerList";
 export default function Form(props) {
   const [name, setName] = useState(props.name || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
+  const [error, setError] = useState("");
 
   function reset() {
     setName("");
@@ -19,7 +20,16 @@ export default function Form(props) {
   }
 
   function save() {
-    console.log("calling save with interviewer of ", interviewer);
+    props.onSave(name, interviewer);
+  }
+
+  function validate() {
+    if (name === "") {
+      setError("Student name cannot be blank");
+      return;
+    }
+
+    setError("");
     props.onSave(name, interviewer);
   }
 
@@ -34,11 +44,13 @@ export default function Form(props) {
             onChange={event => setName(event.target.value)}
             type="text"
             placeholder="Enter Student Name"
+            data-testid="student-name-input"
             /*
             This must be a controlled component
           */
           />
         </form>
+        <section className="appointment__validation">{error}</section>
         <InterviewerList
           interviewers={props.interviewers}
           value={interviewer}
@@ -51,7 +63,7 @@ export default function Form(props) {
           <Button onClick={cancel} danger>
             Cancel
           </Button>
-          <Button onClick={() => save()} confirm>
+          <Button onClick={() => validate()} confirm>
             Save
           </Button>
         </section>
