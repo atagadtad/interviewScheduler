@@ -20,13 +20,9 @@ export default function Appointment(props) {
   const ERROR_SAVE = "ERROR_SAVE";
   const ERROR_DELETE = "ERROR_DELETE";
 
-  console.log("props: ", props);
-
   const { mode, transition, back } = useVisualMode(
     props.interview === null ? EMPTY : SHOW
   );
-
-  // console.log(mode);
 
   function save(name, interviewer) {
     const interview = {
@@ -51,9 +47,11 @@ export default function Appointment(props) {
   }
 
   function interviewDetail(detail = "") {
+    console.log("huh", props.time, props.interview);
     return props.interview && detail.length > 0 && props.interview[detail];
   }
-  console.log("interviewDetail(interviwer: ", interviewDetail("interviewer"));
+
+  // console.log("component", props);
   return (
     <article data-testid="appointment" className="appointment">
       <Header time={props.time} />

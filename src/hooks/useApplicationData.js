@@ -6,6 +6,7 @@ export default function useApplicationData() {
   const SET_DAY = "SET_DAY";
   const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
   const SET_INTERVIEW = "SET_INTERVIEW";
+  const DELETE_INTERVIEW = "DELETE_INTERVIEW";
 
   function reducer(state, action) {
     switch (action.type) {
@@ -30,6 +31,16 @@ export default function useApplicationData() {
               ? { [action.appointment.id]: action.appointment }
               : {})
           },
+          days: action.days
+        };
+      }
+      case DELETE_INTERVIEW: {
+        const appointments = { ...state.appointments };
+        appointments[action.appointment.id].interview = null;
+
+        return {
+          ...state,
+          appointments,
           days: action.days
         };
       }
@@ -66,19 +77,12 @@ export default function useApplicationData() {
 
   function updatedDays(appointments) {
     return state.days.map(day => {
-      let result = 0;
-      day.appointments.forEach(appointmentId => {
-        if (
-          appointments[appointmentId] &&
-          (appointments[appointmentId].interview === null ||
-            appointments[appointmentId].interview === "Unnamed Interviewer")
-        ) {
-          result += 1;
-        }
-      });
+      let spots = day.appointments.filter(
+        appointmentId => appointments[appointmentId].interview
+      );
       return {
         ...day,
-        spots: result
+        spots: 5 - spots.length
       };
     });
   }
@@ -114,18 +118,20 @@ export default function useApplicationData() {
       interview: { ...interview }
     };
 
-    const appointments = {
-      ...state.appointments,
-      [appointmentId]: appointment
-    };
+    // const appointments = {
+    //   ...state.appointments,
+    //   [appointmentId]: appointment
+    // };
 
     return axios
       .delete(`http://localhost:8001/api/appointments/${appointmentId}`, {
         interview
       })
       .then(res => {
+        const appointments = { ...state.appointments };
+        appointments[appointmentId].interview = null;
         dispatch({
-          type: SET_INTERVIEW,
+          type: DELETE_INTERVIEW,
           days: updatedDays(appointments),
           appointment
         });
