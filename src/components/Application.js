@@ -38,8 +38,6 @@ export default function Application(props) {
     );
   });
 
-  console.log("appointmentlist", appointmentList);
-
   return (
     <main className="layout">
       <section className="sidebar">

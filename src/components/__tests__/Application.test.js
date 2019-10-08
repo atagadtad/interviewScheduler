@@ -94,14 +94,12 @@ it("loads data, cancels an interview and increases the spots remaining for Monda
   expect(getByText(day, "5 spots remaining")).toBeInTheDocument();
 });
 
-it.only("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
+it("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
   // 1. Render the Application.
-  const { container, debug } = render(<Application />);
+  const { container } = render(<Application />);
 
   // 2. Wait until the text "Archie Cohen" is displayed.
   await waitForElement(() => getByText(container, "Archie Cohen"));
-
-  debug();
 
   // // 3. Click the "Edit" button on the booked appointment.
   const appointment = getAllByTestId(container, "appointment").find(

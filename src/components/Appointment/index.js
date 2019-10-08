@@ -47,11 +47,9 @@ export default function Appointment(props) {
   }
 
   function interviewDetail(detail = "") {
-    console.log("huh", props.time, props.interview);
     return props.interview && detail.length > 0 && props.interview[detail];
   }
 
-  // console.log("component", props);
   return (
     <article data-testid="appointment" className="appointment">
       <Header time={props.time} />
