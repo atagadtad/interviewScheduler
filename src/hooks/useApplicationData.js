@@ -70,7 +70,8 @@ export default function useApplicationData() {
       day.appointments.forEach(appointmentId => {
         if (
           appointments[appointmentId] &&
-          appointments[appointmentId].interview === null
+          (appointments[appointmentId].interview === null ||
+            appointments[appointmentId].interview === "Unnamed Interviewer")
         ) {
           result += 1;
         }
