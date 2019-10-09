@@ -33,7 +33,7 @@ deploy:
     - run:
         name: Push Master to Production
         command: |
-          git push 'git@github.com:atagadtad/interviewScheduler.git' master:production
+          git push 'https://github.com/atagadtad/interviewScheduler.git' master:production
 
 workflows:
   version: 2
