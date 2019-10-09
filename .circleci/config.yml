@@ -33,7 +33,7 @@ jobs:
     - run:
         name: Push Master to Production
         command: |
-          git push https://github.com/atagadtad/interviewScheduler master:production
+          git push https://github.com/atagadtad/interviewScheduler.git master:production
 
 
 workflows:

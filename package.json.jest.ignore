@@ -1,0 +1,7 @@
+  "jest": {
+    "watchPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "src/**/*.js",
+      "!src/index.js"
+    ]
+  },
