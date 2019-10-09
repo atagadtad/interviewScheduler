@@ -19,7 +19,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: npm test
 
-      deploy:
+deploy:
   machine:
     enabled: true
 
@@ -28,13 +28,12 @@ jobs:
   steps:
     - add_ssh_keys:
         fingerprints:
-          - "6b:7b:79:d5:bc:e3:10:e8:63:57:0a:88:66:70:80:5a"
+          - "cf:d3:27:f6:32:9f:2b:6b:d5:ef:52:d7:d8:43:93:ce"
     - checkout
     - run:
         name: Push Master to Production
         command: |
           git push https://github.com/atagadtad/interviewScheduler.git master:production
-
 
 workflows:
   version: 2
