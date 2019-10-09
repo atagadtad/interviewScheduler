@@ -30,12 +30,7 @@ export default function reducer(state, action) {
       };
     }
     case DELETE_INTERVIEW: {
-      // const appointments = { ...state.appointments };
-      // appointments[action.appointment.id].interview = null;
-
       return {
-        // ...state,
-        // appointments,
         ...state,
         appointments: {
           ...state.appointments,

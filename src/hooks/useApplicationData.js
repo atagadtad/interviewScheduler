@@ -77,19 +77,12 @@ export default function useApplicationData() {
       interview: { ...interview }
     };
 
-    // const appointments = {
-    //   ...state.appointments,
-    //   [appointmentId]: appointment
-    // };
-
     return axios
       .delete(`http://localhost:8001/api/appointments/${appointmentId}`, {
         interview
       })
       .then(res => {
         console.log(".then check:", "oh hai");
-        // const appointments = { ...state.appointments };
-        // appointments[appointmentId].interview = null;
         const appointments = {
           ...state.appointments,
           [appointmentId]: {
@@ -104,7 +97,6 @@ export default function useApplicationData() {
           appointment
         });
       });
-    // .catch(e => console.log(e));
   }
 
   return { state, setDay, bookInterview, cancelInterview };
