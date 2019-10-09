@@ -1,5 +1,7 @@
 # Interview Scheduler
 
+A handy single page app that keeps tracks of students and interviewers! Awesome for students, great for interviewers!
+
 ## Setup
 
 Install dependencies with `npm install`.
