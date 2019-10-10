@@ -19,21 +19,6 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: npm test
 
-deploy:
-  machine:
-    enabled: true
-
-  working_directory: ~/client
-
-  steps:
-    - add_ssh_keys:
-        fingerprints:
-          - "b6:fe:d7:14:15:65:40:c9:9e:7d:96:4c:c8:59:d3:08"
-    - checkout
-    - run:
-        name: Push Master to Production
-        command: |
-          git push "https://github.com/atagadtad/interviewScheduler.git" master:production
 
 workflows:
   version: 2
@@ -50,3 +35,20 @@ workflows:
           requires:
             - build
             
+
+deploy:
+  machine:
+    enabled: true
+
+  working_directory: ~/client
+
+  steps:
+    - add_ssh_keys:
+        fingerprints:
+          - "b6:fe:d7:14:15:65:40:c9:9e:7d:96:4c:c8:59:d3:08"
+    - checkout
+    - run:
+        name: Push Master to Production
+        command: |
+          git push "https://github.com/atagadtad/interviewScheduler.git" master:production
+
