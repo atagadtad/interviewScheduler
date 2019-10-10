@@ -1,8 +1,5 @@
-
-
 version: 2
 jobs:
-
   build:
     docker:
       - image: circleci/node:10.16
@@ -22,7 +19,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: npm test
 
-  deploy:
+deploy:
     machine:
       enabled: true
 
@@ -37,10 +34,6 @@ jobs:
           name: Push Master to Production
           command: |
             git push "https://github.com/atagadtad/interviewScheduler.git" master:production
-
-
-
-
 
 
 workflows:
