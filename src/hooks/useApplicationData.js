@@ -21,9 +21,9 @@ export default function useApplicationData() {
 
   useEffect(() => {
     Promise.all([
-      axios.get(`https://scheduler-dashboard.herokuapp.com/api/days`),
-      axios.get(`https://scheduler-dashboard.herokuapp.com/api/appointments`),
-      axios.get(`https://scheduler-dashboard.herokuapp.com/api/interviewers`)
+      axios.get("https://scheduler-dashboard.herokuapp.com/api/days"),
+      axios.get("https://scheduler-dashboard.herokuapp.com/api/appointments"),
+      axios.get("https://scheduler-dashboard.herokuapp.com/api/interviewers")
     ]).then(all => {
       dispatch({
         type: SET_APPLICATION_DATA,
