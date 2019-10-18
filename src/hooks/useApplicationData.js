@@ -58,7 +58,7 @@ export default function useApplicationData() {
     };
 
     return axios
-      .put(`http://localhost:8001/api/appointments/${appointmentId}`, {
+      .put(`https://scheduler-dashboard.herokuapp.com/${appointmentId}`, {
         interview
       })
       .then(res => {
