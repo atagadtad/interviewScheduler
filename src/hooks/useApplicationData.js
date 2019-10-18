@@ -58,7 +58,7 @@ export default function useApplicationData() {
     };
 
     return axios
-      .put(`https://scheduler-dashboard.herokuapp.com/${appointmentId}`, {
+      .put(`https://scheduler-dashboard.herokuapp.com/api/appointments/${appointmentId}`, {
         interview
       })
       .then(res => {
@@ -78,7 +78,7 @@ export default function useApplicationData() {
     };
 
     return axios
-      .delete(`http://localhost:8001/api/appointments/${appointmentId}`, {
+      .delete(`https://scheduler-dashboard.herokuapp.com/api/appointments/${appointmentId}`, {
         interview
       })
       .then(res => {
